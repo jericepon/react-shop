@@ -1,16 +1,15 @@
+import Navbar from '@/components/shared/Navbar'
 import React from 'react'
 import { Outlet } from 'react-router'
 
 function DefaultLayout() {
   return (
-    <div>
-      <header>
-        <h1>My Site</h1>
-      </header>
-      <main>
+    <>
+      <Navbar />
+      <main className='pt-[80px]'>
         <Outlet />
       </main>
-    </div>
+    </>
   )
 }
 
