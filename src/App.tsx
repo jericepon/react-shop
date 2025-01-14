@@ -1,7 +1,9 @@
+import { Outlet } from "react-router"
+
 function App() {
   return (
     <>
-      <h1 className="bg-slate-950">Template</h1>
+      <Outlet />
     </>
   )
 }
