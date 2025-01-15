@@ -1,4 +1,4 @@
-import { RootState } from '@/store';
+import { RootState } from '@/store/rootState';
 import { ComponentType } from 'react';
 import { useSelector } from 'react-redux';
 import { Navigate } from 'react-router';

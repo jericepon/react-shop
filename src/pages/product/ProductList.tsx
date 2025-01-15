@@ -1,8 +1,8 @@
 import ProductCard from "@/components/shared/ProductCard";
 import ProductSearch from "@/components/shared/ProductSearch";
-import { Category } from "@/models/Product";
-import { AppDispatch, RootState } from "@/store";
+import { Category, Product } from "@/models/Product";
 import { getAllProducts, searchByCategory, searchProduct } from "@/store/features/Product";
+import { AppDispatch, RootState } from "@/store/rootState";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -42,7 +42,7 @@ const ProductList = () => {
               list.length === 0 ?
                 <p className="col-span-1 sm:col-span-2 md:col-span-3 lg:col-span-4 text-center">No products found</p>
                 :
-                list.map((product) => (
+                list.map((product: Product) => (
                   <ProductCard key={product.id} product={product} />
                 ))
             }
