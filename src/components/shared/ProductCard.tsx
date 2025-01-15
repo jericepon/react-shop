@@ -14,7 +14,7 @@ import { Skeleton } from "../ui/skeleton"
 const ProductCard = ({ product }: { product: Product }) => {
 
   return (
-    <Card className="flex flex-col">
+    <Card className="flex flex-col overflow-hidden">
       <AspectRatio ratio={4 / 3} className="overflow-hidden">
         <img src={product.thumbnail} alt={product.title} className="w-full" />
       </AspectRatio>
