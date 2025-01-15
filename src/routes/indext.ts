@@ -4,7 +4,7 @@ import CartPage from "@/pages/cart/CartPage";
 import HomePage from "@/pages/HomePage";
 import NotFoundPage from "@/pages/NotFoundPage";
 import ProductList from "@/pages/product/ProductList";
-import { createBrowserRouter, useNavigate } from "react-router";
+import { createBrowserRouter } from "react-router";
 import ProtectedRouteWrapper from "./ProtectedRouteWrapper";
 
 let router = createBrowserRouter([
