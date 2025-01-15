@@ -27,16 +27,16 @@ const auth = createSlice({
   initialState,
   reducers: {
     logout: (state) => {
-      state.authInfo = null;
+      state.authInfo = {} as AuthInfo;
       state.isAuthenticated = false;
-      window.location.reload();
-    }
+      state.hasError = false;
+      state.loading = false;
+      window.location.href = '/login';
+    },
   },
   extraReducers: (builder) => {
     builder.addCase(login.pending, (state) => { state.loading = true; })
       .addCase(login.fulfilled, (state, action) => {
-        console.log(action.payload);
-        
         state.loading = false;
         state.authInfo = action.payload;
         state.isAuthenticated = true;

@@ -1,13 +1,33 @@
-import { configureStore } from "@reduxjs/toolkit";
-import Product from "./features/Product";
-import Authentication from "./features/Auth";
+import rootState from './rootState';
+import { configureStore } from '@reduxjs/toolkit';
+import { combineReducers } from 'redux';
+import { FLUSH, PAUSE, PERSIST, persistReducer, persistStore, PURGE, REGISTER, REHYDRATE } from 'redux-persist';
+import storage from 'redux-persist/lib/storage'; // Use localStorage
 
-export const store = configureStore({
-  reducer: {
-    product: Product,
-    auth: Authentication
-  },
+// Combine reducers if you have multiple slices
+const rootReducer = combineReducers({
+  ...rootState,
 });
 
-export type RootState = ReturnType<typeof store.getState>;
-export type AppDispatch = typeof store.dispatch;
+// Persist configuration
+const persistConfig = {
+  key: 'root',
+  storage, // Uses localStorage by default
+};
+
+// Wrap the root reducer with persistReducer
+const persistedReducer = persistReducer(persistConfig, rootReducer);
+
+// Configure the store
+const store = configureStore({
+  reducer: persistedReducer,
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware({
+      serializableCheck: {
+        ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
+      },
+    }),
+});
+
+export const persistor = persistStore(store); // Persistor for rehydration
+export default store;

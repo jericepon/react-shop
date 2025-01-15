@@ -8,14 +8,12 @@ import {
 } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
-import { useToast } from "@/hooks/use-toast"
 import { cn } from "@/lib/utils"
-import { AppDispatch, RootState } from "@/store"
 import { login } from "@/store/features/Auth"
+import { AppDispatch, RootState } from "@/store/rootState"
 import { Loader2 } from "lucide-react"
-import { useEffect, useState } from "react"
+import { useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
-import { useNavigate } from "react-router"
 
 interface LoginCredentials {
   username: string;
@@ -27,8 +25,6 @@ export function LoginForm({
   ...props
 }: React.ComponentPropsWithoutRef<"div">) {
   const dispatch = useDispatch<AppDispatch>()
-  const navigate = useNavigate();
-  const { toast } = useToast()
   const { loading, hasError } = useSelector((state: RootState) => state.auth);
   const [username, setUsername] = useState<string>("");
   const [password, setPassword] = useState<string>("");

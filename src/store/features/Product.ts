@@ -47,6 +47,7 @@ const product = createSlice({
   name: "product",
   initialState,
   reducers: {
+    resetProductState: (state) => { state.list = []; state.loading = true; }
   },
   extraReducers: (builder) => {
     // getAllProducts
@@ -63,5 +64,5 @@ const product = createSlice({
       .addCase(searchByCategory.rejected, (state) => { state.loading = false; });
   }
 });
-
+export const { resetProductState } = product.actions;
 export default product.reducer;
