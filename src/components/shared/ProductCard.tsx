@@ -22,9 +22,9 @@ const ProductCard = ({ product }: { product: Product }) => {
         <CardTitle>{product.title}</CardTitle>
         <CardDescription>{product.description}</CardDescription>
       </CardHeader>
-      <CardContent>
+      <div className="px-6 pt-0">
         <p>${product.price}</p>
-      </CardContent>
+      </div>
       <CardFooter className="flex justify-between mt-auto">
         <Button className="ml-auto">Add to cart</Button>
       </CardFooter>
@@ -37,7 +37,7 @@ ProductCard.Loader = () => {
     <Card className="flex flex-col space-y-3">
       <Skeleton className="rounded-none aspect-square" />
       <CardContent className="space-y-2 pb-0">
-        <Skeleton className="h-4 w-[65%]" />
+        <Skeleton className="h-4 w-x-65%]" />
         <Skeleton className="h-3 w-[95%]" />
         <Skeleton className="h-3 w-[80%]" />
         <Skeleton className="h-3 w-[85%]" />
