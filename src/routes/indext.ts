@@ -1,10 +1,11 @@
-import { createBrowserRouter, Navigate } from "react-router";
 import DefaultLayout from "@/layouts/DefaultLayout";
-import HomePage from "@/pages/HomePage";
-import ProductList from "@/pages/product/ProductList";
-import CartPage from "@/pages/cart/CartPage";
 import LoginPage from "@/pages/auth/LoginPage";
+import CartPage from "@/pages/cart/CartPage";
+import HomePage from "@/pages/HomePage";
 import NotFoundPage from "@/pages/NotFoundPage";
+import ProductList from "@/pages/product/ProductList";
+import { createBrowserRouter, useNavigate } from "react-router";
+import ProtectedRouteWrapper from "./ProtectedRouteWrapper";
 
 let router = createBrowserRouter([
   {
@@ -13,11 +14,12 @@ let router = createBrowserRouter([
   },
   {
     path: "/",
-    Component: DefaultLayout as React.ComponentType,
+    Component: DefaultLayout,
     children: [
       {
         path: "",
         Component: HomePage,
+        index: true,
       },
       {
         path: "product-list",
@@ -25,7 +27,7 @@ let router = createBrowserRouter([
       },
       {
         path: "cart",
-        Component: CartPage,
+        Component: () => (ProtectedRouteWrapper(CartPage)),
       },
     ],
   },

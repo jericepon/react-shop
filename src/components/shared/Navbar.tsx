@@ -10,6 +10,7 @@ const Navbar = () => {
     { id: nanoid(), title: "Home", route: "/", },
     { id: nanoid(), title: "Products", route: "/product-list" },
   ];
+
   return (
     <Card className="bg-card py-3 px-4 border-0 flex items-center justify-between gap-6 rounded-none fixed w-full z-10">
       <ul className="hidden md:flex items-center gap-10 text-card-foreground">
@@ -23,10 +24,10 @@ const Navbar = () => {
       </ul>
 
       <div className="flex items-center">
-        <Button variant="secondary" className="hidden md:block px-2" onClick={() => navigate('/login')}>
+        {/* <Button variant="secondary" className="hidden md:block px-2" onClick={() => navigate('/login')}>
           Login
         </Button>
-        <Button className="hidden md:block ml-2 mr-2">Register</Button>
+        <Button className="hidden md:block ml-2 mr-2">Register</Button> */}
         <Button variant="outline" size="icon" className="relative" onClick={() => navigate('/cart')}>
           <ShoppingBasket />
           <span className="absolute -top-1 -right-1 h-3 w-3 rounded-full bg-red-500" />
