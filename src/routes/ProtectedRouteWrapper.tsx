@@ -1,12 +1,11 @@
+import { RootState } from '@/store';
 import { ComponentType } from 'react';
+import { useSelector } from 'react-redux';
 import { Navigate } from 'react-router';
 
-const isAuthenticated = () => {
-  return false;
-};
-
 const ProtectedRouteWrapper = (Component: ComponentType) => {
-  if (!isAuthenticated())
+  const { isAuthenticated } = useSelector((state: RootState) => state.auth);
+  if (!isAuthenticated)
   {
     return <Navigate to="/login" replace />;
   }
