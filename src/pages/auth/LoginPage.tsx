@@ -1,4 +1,5 @@
 import { LoginForm } from '@/components/shared/LoginForm'
+import { Toaster } from '@/components/ui/toaster'
 
 const LoginPage = () => {
   return (
@@ -6,6 +7,7 @@ const LoginPage = () => {
       <div className="w-full max-w-sm">
         <LoginForm />
       </div>
+      <Toaster />
     </div>
   )
 }
