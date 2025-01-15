@@ -45,7 +45,7 @@ ProductCard.Loader = () => {
       <div className="space-y-2 px-6">
         <Skeleton className="h-3 w-[100px] mt-3" />
       </div>
-      <CardFooter className="flex justify-between mt-auto mt-96">
+      <CardFooter className="flex justify-between mt-auto">
         <Skeleton className="h-[36px] w-[103px] mt-[24px] ml-auto" />
       </CardFooter>
     </Card>
