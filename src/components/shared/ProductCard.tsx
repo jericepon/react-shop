@@ -1,16 +1,13 @@
 import { Button } from "@/components/ui/button"
 import {
   Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
   CardHeader,
-  CardTitle,
+  CardTitle
 } from "@/components/ui/card"
-import { AspectRatio } from '../ui/aspect-ratio'
 import { Product } from "@/models/Product"
-import { Skeleton } from "../ui/skeleton"
 import { Plus } from "lucide-react"
+import { AspectRatio } from '../ui/aspect-ratio'
+import { Skeleton } from "../ui/skeleton"
 
 const ProductCard = ({ product }: { product: Product }) => {
   return (
@@ -30,7 +27,7 @@ const ProductCard = ({ product }: { product: Product }) => {
             </Button>
           </div>
           <div className="flex justify-between items-center mt-2">
-          <div>${product.price}</div>
+            <div>${product.price}</div>
             <span className="text-sm text-muted-foreground">In Stock: {product.stock}</span>
           </div>
         </CardHeader>
