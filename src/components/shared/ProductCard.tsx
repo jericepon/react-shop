@@ -17,14 +17,16 @@ const ProductCard = ({ product }: { product: Product }) => {
           <img src={product.thumbnail} alt={product.title} className="w-full bg-muted rounded-xl" />
         </AspectRatio>
         <CardHeader className="pt-0 mt-auto">
-          <div className="grid grid-cols-3 gap-2">
+          <div className="flex gap-2">
             <div className="flex flex-col space-y-2 col-span-2">
               <CardTitle>{product.title}</CardTitle>
               <div className="text-sm text-muted-foreground col-span-2">{product.brand}</div>
             </div>
-            <Button variant="outline" size="icon" className="my-auto ml-auto">
-              <Plus />
-            </Button>
+            <div className="w-[36px] ml-auto">
+              <Button variant="outline" size="icon" className="my-auto ml-auto">
+                <Plus />
+              </Button>
+            </div>
           </div>
           <div className="flex justify-between items-center mt-2">
             <div>${product.price}</div>
