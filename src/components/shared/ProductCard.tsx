@@ -56,7 +56,7 @@ const ProductCard = ({ product, onAddToCart }: { product: Product, onAddToCart: 
                 <PopoverContent className="p-4 rounded-md shadow-md w-auto">
                   <div className="flex items-center space-x-3 justify-center">
                     <Label>Quantity</Label>
-                    <Input type="number" className="w-20" onChange={(e) => setQuantity(e.target.value)} value={quantity} />
+                    <Input type="number" className="w-20" min={1} onChange={(e) => setQuantity(e.target.value)} value={quantity} />
                     <Button variant="outline" size="icon" className={`my-auto ml-auto ${productAdded && 'border-green-500'}`} disabled={addToCartPending} onClick={handleAddToCart}>
                       {addToCartPending ?
                         <Loader2 className="animate-spin" />

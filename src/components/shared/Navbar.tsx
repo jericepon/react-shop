@@ -38,6 +38,14 @@ const Navbar = () => {
     persistor.purge();
   }
 
+  const handleCartPopover = (isOpen: boolean) => {
+    if (!isAuthenticated)
+    {
+      return navigate("/login");
+    }
+    setIsCartListOpen(isOpen);
+  }
+
   useEffect(() => {
     if (!addToCartPending)
     {
@@ -69,7 +77,7 @@ const Navbar = () => {
       </ul>
 
       <div className="flex items-center space-x-4">
-        <Popover open={isCartListOpen} onOpenChange={(isOpen) => setIsCartListOpen(isOpen)}>
+        <Popover open={isCartListOpen} onOpenChange={(isOpen) => handleCartPopover(isOpen)}>
           <PopoverTrigger asChild>
             <Button variant="outline" size="icon" className="relative mt-0">
               <ShoppingBasket />

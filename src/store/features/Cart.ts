@@ -17,19 +17,7 @@ export const addNewCart = createAsyncThunk('cart/add', async (addedToCartPayload
     response,
     new Promise((resolve) => setTimeout(resolve, 1000))
   ]).then(([response]) => {
-    Promise.resolve(dispatch(cart.actions.updateCartList(response.data.products))).then(() => {
-      // dispatch(getCartByUser(addedToCartPayload.userId));
-    });
-    return response.data.products;
-  });
-});
-
-export const getCartByUser = createAsyncThunk('cart/getCartByUser', async (cartId: number) => {
-  const response = await API.get(`/cart/user/${cartId}`);
-  return Promise.all([
-    response,
-    new Promise((resolve) => setTimeout(resolve, 1000))
-  ]).then(([response]) => {
+    dispatch(cart.actions.updateCartList(response.data.products))
     return response.data.products;
   });
 });
@@ -37,6 +25,10 @@ export const getCartByUser = createAsyncThunk('cart/getCartByUser', async (cartI
 export const addToCart = createAsyncThunk(
   'cart/addToCart',
   async (payload: { userId: number, product: { id: number, quantity: number } }, { dispatch, getState }) => {
+    if (!payload.userId)
+    {
+      window.location.href = '/login';
+    }
     const state = getState() as { cart: CartState };
     const updatedCartData = {
       ...state.cart.addedToCartData,
