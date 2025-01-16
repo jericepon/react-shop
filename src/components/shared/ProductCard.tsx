@@ -5,23 +5,35 @@ import {
   CardTitle
 } from "@/components/ui/card"
 import { Product } from "@/models/Product"
+import { RootState } from "@/store/rootState"
 import { PopoverArrow } from "@radix-ui/react-popover"
-import { Plus, ShoppingBasket } from "lucide-react"
+import { Check, Loader2, Plus, ShoppingBasket } from "lucide-react"
+import { useEffect, useState } from "react"
+import { useSelector } from "react-redux"
 import { AspectRatio } from '../ui/aspect-ratio'
 import { Input } from "../ui/input"
 import { Label } from "../ui/label"
 import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover"
 import { Skeleton } from "../ui/skeleton"
-import { useState } from "react"
-import { AddedToCartData } from "@/models/Cart"
 
-const ProductCard = ({ product }: { product: Product }) => {
+const ProductCard = ({ product, onAddToCart }: { product: Product, onAddToCart: (quantity: number) => void }) => {
+  const { addToCartPending } = useSelector((state: RootState) => state.cart)
   const [quantity, setQuantity] = useState<string | number>(1)
-  const [addedToCartData, setAddedToCartData] = useState<AddedToCartData[]>()
-  const handleAddToCart = (product: Product) => {
-    console.log(product);
-    // dispatch(addCart({ userId: 1, productId: [{ id: product.id, quantity: Number(quantity) }] }))
+  const [productAdded, setProductAdded] = useState(false);
+
+  const handleAddToCart = () => {
+    onAddToCart(Number(quantity))
   }
+
+  useEffect(() => {
+    if (!addToCartPending) setProductAdded(true);
+    setTimeout(() => { setProductAdded(false) }, 1000)
+  }, [addToCartPending])
+
+  useEffect(() => {
+    productAdded && setTimeout(() => setProductAdded(false), 1000)
+  }, [productAdded]);
+
   return (
     <>
       <Card className="flex flex-col">
@@ -45,12 +57,21 @@ const ProductCard = ({ product }: { product: Product }) => {
                   <div className="flex items-center space-x-3 justify-center">
                     <Label>Quantity</Label>
                     <Input type="number" className="w-20" onChange={(e) => setQuantity(e.target.value)} value={quantity} />
-                    <Button variant="outline" size="icon" className="my-auto ml-auto" onClick={() => handleAddToCart(product)}>
-                      {/* {loading && <Loader2 className="animate-spin" />} */}
-                      <Plus />
+                    <Button variant="outline" size="icon" className={`my-auto ml-auto ${productAdded && 'border-green-500'}`} disabled={addToCartPending} onClick={handleAddToCart}>
+                      {addToCartPending ?
+                        <Loader2 className="animate-spin" />
+                        :
+                        <>
+                          {productAdded ?
+                            <Check color="#22c55e" className="animate-pulse" />
+                            :
+                            <Plus />
+                          }
+                        </>
+                      }
                     </Button>
                   </div>
-                  <PopoverArrow height={9} className="fill-muted stroke-muted" />
+                  <PopoverArrow height={10} className="fill-muted" />
                 </PopoverContent>
               </Popover>
             </div>

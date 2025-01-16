@@ -3,6 +3,11 @@ export interface AddedToCartData {
   products: Array<{ id: number; quantity: number }>;
 }
 
+export interface AddedToCartListItem {
+  id: number
+  quantity: number
+}
+
 export interface CartItem {
   id: number;
   title: string;
