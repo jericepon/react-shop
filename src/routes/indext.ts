@@ -10,7 +10,7 @@ import ProtectedRouteWrapper from "./ProtectedRouteWrapper";
 let router = createBrowserRouter([
   {
     path: "login",
-    Component: LoginPage,
+    Component: () => ProtectedRouteWrapper(LoginPage),
   },
   {
     path: "/",
