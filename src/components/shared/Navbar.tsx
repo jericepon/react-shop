@@ -8,6 +8,8 @@ import { LogOut, ShoppingBasket } from "lucide-react";
 import { nanoid } from "nanoid";
 import { useDispatch, useSelector } from "react-redux";
 import { NavLink, useNavigate } from "react-router";
+import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from "../ui/dropdown-menu";
 
 const Navbar = () => {
   const navigate = useNavigate();
@@ -37,19 +39,43 @@ const Navbar = () => {
       </ul>
 
       <div className="flex items-center space-x-4">
-        {
-          isAuthenticated && <Button variant="secondary" size="sm" className="px-2 w-24" onClick={() => handleLogout()}>
-            <LogOut />
-            Logout
-          </Button>
-        }
         <Button variant="outline" size="icon" className="relative mt-0" onClick={() => navigate('/cart')}>
           <ShoppingBasket />
           <span className="absolute -top-1 -right-1 h-3 w-3 rounded-full bg-red-500" />
         </Button>
+        {
+          isAuthenticated && <Navbar.AvatarDropdown handleLogout={handleLogout} />
+        }
       </div>
     </Card>
   );
 };
+
+Navbar.AvatarDropdown = ({ handleLogout }: { handleLogout: () => void }) => {
+  const { authInfo } = useSelector((state: RootState) => state.auth);
+  return (
+    <DropdownMenu>
+      <DropdownMenuTrigger asChild>
+        <Avatar>
+          <AvatarImage src={authInfo.image} />
+          <AvatarFallback>
+            <img src={`https://ui-avatars.com/api/?name=${authInfo.firstName}+${authInfo.lastName}`} alt={`${authInfo.firstName} ${authInfo.lastName}`} />
+          </AvatarFallback>
+        </Avatar>
+      </DropdownMenuTrigger>
+      <DropdownMenuContent>
+        <DropdownMenuLabel>My Account</DropdownMenuLabel>
+        <DropdownMenuSeparator />
+        <DropdownMenuItem>Profile</DropdownMenuItem>
+        <DropdownMenuItem>Settings</DropdownMenuItem>
+        <DropdownMenuSeparator />
+        <DropdownMenuItem onClick={() => handleLogout()}>
+          <LogOut />
+          Logout
+        </DropdownMenuItem>
+      </DropdownMenuContent>
+    </DropdownMenu>
+  )
+}
 
 export default Navbar;
