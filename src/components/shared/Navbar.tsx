@@ -21,9 +21,9 @@ const Navbar = () => {
   ];
 
   const handleLogout = () => {
-    persistor.purge();
     dispatch(resetProductState());
     dispatch(logout());
+    persistor.purge();
   }
 
   return (

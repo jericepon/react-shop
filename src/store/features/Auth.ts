@@ -43,7 +43,7 @@ const auth = createSlice({
         state.hasError = false;
         window.location.href = "/";
       })
-      .addCase(login.rejected, (state) => {
+      .addCase(login.rejected, (state) => {        
         state.loading = false;
         state.isAuthenticated = false;
         state.hasError = true;
